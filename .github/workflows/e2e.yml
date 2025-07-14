@@ -32,14 +32,10 @@ jobs:
           repository: bootc-dev/bootc
           ref: main
 
-      - run: ls -al
-
       - name: Checkout this repo repo
         uses: actions/checkout@v4
         with:
           path: mock_build
-
-      - run: ls -al
 
       - name: Copy mock_build.sh into contrib/scripts
         run: cp mock_build/mock_build.sh contrib/scripts/
