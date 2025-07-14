@@ -106,9 +106,9 @@ jobs:
           for arch in $ARCHES; do
             buildah pull "${REGISTRY_NAME}:${{ github.sha }}-${arch}"
           done
-          buildah manifest create "${REGISTRY_NAME}:${{ github.sha }}" `for arch in ${ARCHES}; do echo "${REGISTRY_NAME}:${{ github.sha }}-${arch};" done`
+          buildah manifest create ${REGISTRY_NAME}:${{ github.sha }} `for arch in ${ARCHES}; do echo ${REGISTRY_NAME}:${{ github.sha }}-${arch}; done`
           for arch in ${ARCHES}; do
-            buildah manifest annotate "${REGISTRY_NAME}:${{ github.sha }}" "${REGISTRY_NAME}:${{ github.sha }}-${arch}" --os linux --arch ${arch}
+            buildah manifest annotate ${REGISTRY_NAME}:${{ github.sha }} ${REGISTRY_NAME}:${{ github.sha }}-${arch} --os linux --arch ${arch}
           done
-          buildah tag "${REGISTRY_NAME}:${{ github.sha }}"
-          buildah manifest push --all "${REGISTRY_NAME}:${{ github.sha }}" docker://"${REGISTRY_NAME}:${{ github.sha }}"
+          buildah tag ${REGISTRY_NAME}:${{ github.sha }}
+          buildah manifest push --all ${REGISTRY_NAME}:${{ github.sha }} docker://${REGISTRY_NAME}:${{ github.sha }}
