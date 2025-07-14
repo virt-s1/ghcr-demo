@@ -106,6 +106,4 @@ jobs:
           for arch in ${ARCHES}; do
             buildah manifest annotate ${REGISTRY_NAME}:${{ github.sha }} ${REGISTRY_NAME}:${{ github.sha }}-${arch} --os linux --arch ${arch}
           done
-          buildah tag ${REGISTRY_NAME}:${{ github.sha }} ${REGISTRY_NAME}:latest
           buildah manifest push --all ${REGISTRY_NAME}:${{ github.sha }} docker://${REGISTRY_NAME}:${{ github.sha }}
-          buildah manifest push --all=false ${REGISTRY_NAME}:latest ${REGISTRY_NAME}:latest
